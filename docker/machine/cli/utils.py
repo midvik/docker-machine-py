@@ -12,7 +12,7 @@ def convert_camel_to_snake(name):
 
 def convert_keys_from_camel_to_snake(d):
     new = {}
-    for k, v in d.iteritems():
+    for k, v in d.items():
         if isinstance(v, dict):
             v = convert_keys_from_camel_to_snake(v)
         new[convert_camel_to_snake(k)] = v

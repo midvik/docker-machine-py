@@ -1,4 +1,4 @@
-from UserDict import IterableUserDict
+from collections import UserDict
 import collections
 
 __author__ = 'github.com/hangtwenty'
@@ -60,18 +60,18 @@ def tupperware(mapping):
 
     if (isinstance(mapping, collections.Mapping) and
             not isinstance(mapping, ProtectedDict)):
-        for key, value in mapping.iteritems():
+        for key, value in mapping.items():
             mapping[key] = tupperware(value)
         return namedtuple_from_mapping(mapping)
     return mapping
 
 
 def namedtuple_from_mapping(mapping, name="Tupperware"):
-    this_namedtuple_maker = collections.namedtuple(name, mapping.iterkeys())
+    this_namedtuple_maker = collections.namedtuple(name, mapping.keys())
     return this_namedtuple_maker(**mapping)
 
 
-class ProtectedDict(IterableUserDict):
+class ProtectedDict(UserDict):
     """ A class that exists just to tell `tupperware` not to eat it.
 
     `tupperware` eats all dicts you give it, recursively; but what if you

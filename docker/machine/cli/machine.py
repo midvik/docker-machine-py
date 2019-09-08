@@ -65,6 +65,9 @@ class Machine(object):
                 if hasattr(self, after_callback):
                     getattr(self, after_callback)()
 
+                if not hasattr(client_output, 'formatted'):
+                    return client_output
+
                 return self if client_output.formatted is None else client_output.formatted
             return wrapper
         else:

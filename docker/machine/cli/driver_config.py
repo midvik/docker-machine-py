@@ -22,20 +22,20 @@ class DriverConfig(object):
 
         self._require(required_args)
 
-        for k, v in kwargs.iteritems():
+        for k, v in kwargs.items():
             setattr(self, k, v)
 
     def args(self):
         arg_dictionary = {}
         config_vars = dict(vars(self))
         del config_vars['non_driver_keys']
-        for k, v in config_vars.iteritems():
+        for k, v in config_vars.items():
             key = self._format_key(k) if k in self.non_driver_keys else self._format_driver_key(k)
             value = self._format_val(v)
             arg_dictionary[key] = value
 
         no_none_values = {k: v for k, v in arg_dictionary.items() if v is not None}
-        return ["{}={}".format(k, v) for k, v in no_none_values.iteritems()]
+        return ["{}={}".format(k, v) for k, v in no_none_values.items()]
 
     @staticmethod
     def _format_key(arg):

@@ -106,7 +106,7 @@ class Client(object):
         returncode = output.returncode
 
         if returncode == 0:
-            return out
+            return out.decode()
 
         error = error.strip()
         raise errors.CLIError(error)
@@ -114,7 +114,7 @@ class Client(object):
     def active(self):
         try:
             raw = self.cmd(['active'])
-        except errors.CLIError, e:
+        except errors.CLIError as e:
             msg = e.message
             if msg == 'No active host found':
                 return ClientOutput(msg, '')
