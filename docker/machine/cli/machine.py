@@ -83,7 +83,7 @@ class Machine(object):
         return len(self.client.ls(quiet=True, filters='name={}'.format(self.name)).formatted) != 0
 
     def active(self):
-        self.client.active() == self.name
+        return self.client.active() == self.name
 
     def runningish(self):
         return self.status() in [Status.running, Status.starting]
